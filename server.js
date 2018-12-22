@@ -1,5 +1,6 @@
 var express = require("express");
 var logger = require("morgan");
+const path = require("path");
 const session = require('cookie-session');
 
 const bodyParser = require('body-parser');
@@ -19,8 +20,7 @@ app.use(session({
     keys: ['secretkey1', 'secretkey2', '...']
 }));
 
-app.use(express.static("public"));
-
+app.use(express.static(path.join(__dirname, 'public')));
 // Configure passport middleware
 app.use(passport.initialize());
 app.use(passport.session());

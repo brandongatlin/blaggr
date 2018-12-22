@@ -1,10 +1,13 @@
 const passport = require('passport');
+const path = require('path')
 var User = require("../models/userModel.js");
 
 module.exports = function(app) {
 
     app.get('/', function(req, res) {
-        res.sendFile('index.html')
+        res.sendFile('/index.html', {
+            root: 'views'
+        });
     })
 
     app.post('/register', function(req, res, next) {
@@ -50,22 +53,14 @@ module.exports = function(app) {
         console.log('user ', req.user)
 
         if (req.isAuthenticated()) {
-            res.send('hello, from the dashboard')
+            console.log(__dirname)
+            res.sendFile('/dashboard.html', {
+                root: 'views'
+            });
         } else {
             res.send("nononononon not logge din")
         }
 
     });
-
-    // passport.use(new LocalStrategy({
-    //         usernameField: "user-email",
-    //         passwordField: "user-password"
-    //     },
-    //     function (username, password, done) {
-    //         return done(null, false, {
-    //             message: 'Unable to login'
-    //         })
-    //     }
-    // ));
 
 }
