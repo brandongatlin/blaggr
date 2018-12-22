@@ -27,10 +27,10 @@ var UserSchema = new Schema({
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
     },
 
-    posts: {
-        type: Schema.Types.ObjectId,
-        ref: "Article",
-    },
+    // posts: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Article",
+    // },
 
     userCreated: {
         type: Date,

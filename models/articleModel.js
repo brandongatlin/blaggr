@@ -29,6 +29,11 @@ const ArticleSchema = new Schema({
         ref: "Comment",
     },
 
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
+
     articleCreated: {
         type: Date,
         default: Date.now

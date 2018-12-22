@@ -1,6 +1,8 @@
 const passport = require('passport');
 const path = require('path')
 var User = require("../models/userModel.js");
+var Article = require("../models/articleModel.js");
+
 
 module.exports = function(app) {
 
@@ -29,18 +31,6 @@ module.exports = function(app) {
         });
     });
 
-    // app.get('/login', function(req, res) {
-    //     res.sendFile('dashboard.html', {
-    //         user: req.user
-    //     });
-    // });
-
-    // app.post('/login', passport.authenticate('local'), function(req, res) {
-    //     console.log('login req is ')
-
-    //     res.redirect("/dashboard")
-    // })
-
     app.post('/login',
         passport.authenticate('local', {
             successRedirect: '/dashboard',
@@ -54,7 +44,7 @@ module.exports = function(app) {
 
         if (req.isAuthenticated()) {
             console.log(__dirname)
-            res.sendFile('/dashboard.html', {
+            res.sendFile('/blog.html', {
                 root: 'views'
             });
         } else {
@@ -62,5 +52,23 @@ module.exports = function(app) {
         }
 
     });
+
+    app.post('/post', function(req, res) {
+        console.log('post', req.body);
+
+        Article.create({
+            title: req.body.title,
+            subTitle: req.body.subheading,
+            body: req.body.text,
+            author: req.user._id
+        }).then(function(newPost) {
+            console.log(newPost);
+
+            res.redirect('/dashboard')
+
+
+        })
+
+    })
 
 }
