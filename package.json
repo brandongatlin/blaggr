@@ -4,6 +4,7 @@
   "description": "blog website",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.4",
     "mongoose": "^5.4.0",

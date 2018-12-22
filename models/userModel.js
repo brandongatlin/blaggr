@@ -20,22 +20,16 @@ var UserSchema = new Schema({
         required: "Username is Required"
     },
 
-    // password: {
-    //     type: String,
-    //     trim: true,
-    //     required: "Password is Required",
-    //     validate: [
-    //         function(input) {
-    //             return input.length >= 6;
-    //         },
-    //         "Password should be longer."
-    //     ]
-    // },
     // You can read more about RegEx Patterns here https://www.regexbuddy.com/regex.html
     username: {
         type: String,
         unique: true,
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+    },
+
+    posts: {
+        type: Schema.Types.ObjectId,
+        ref: "Article",
     },
 
     userCreated: {
