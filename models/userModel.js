@@ -1,23 +1,23 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 // Save a reference to the Schema constructor
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const passportLocalMongoose = require('passport-local-mongoose');
 
 // Using the Schema constructor, create a new UserSchema object
-var UserSchema = new Schema({
+const UserSchema = new Schema({
 
     firstName: {
         type: String,
         trim: true,
-        required: "Username is Required"
+        required: "First Name is Required"
     },
 
     lastName: {
         type: String,
         trim: true,
-        required: "Username is Required"
+        required: "Last Name is Required"
     },
 
     // You can read more about RegEx Patterns here https://www.regexbuddy.com/regex.html
@@ -27,10 +27,9 @@ var UserSchema = new Schema({
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
     },
 
-    // posts: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Article",
-    // },
+    following: {
+        type: [Schema.Types.ObjectId]
+    },
 
     userCreated: {
         type: Date,
@@ -42,7 +41,7 @@ UserSchema.plugin(passportLocalMongoose);
 
 
 // This creates our model from the above schema, using mongoose's model method
-var User = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 // Export the User model
 module.exports = mongoose.model('User', UserSchema);

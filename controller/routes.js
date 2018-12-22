@@ -1,7 +1,8 @@
 const passport = require('passport');
 const path = require('path')
-var User = require("../models/userModel.js");
-var Article = require("../models/articleModel.js");
+const User = require("../models/userModel.js");
+const Article = require("../models/articleModel.js");
+const Comment = require("../models/commentModel.js");
 
 
 module.exports = function(app) {
@@ -42,16 +43,10 @@ module.exports = function(app) {
         console.log('auth ', req.isAuthenticated())
         console.log('user ', req.user)
 
-        if (req.isAuthenticated()) {
-            console.log(__dirname)
-            res.sendFile('/blog.html', {
-                root: 'views'
-            });
-        } else {
-            res.send("nononononon not logge din")
-        }
-
-    });
+        res.sendFile('/dashboard.html', {
+            root: 'views'
+        });
+    })
 
     app.post('/post', function(req, res) {
         console.log('post', req.body);
@@ -65,8 +60,6 @@ module.exports = function(app) {
             console.log(newPost);
 
             res.redirect('/dashboard')
-
-
         })
 
     })

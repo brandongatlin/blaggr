@@ -5,9 +5,14 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="./libraries/materialize/css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/styles.css" />
 </head>
 
 <body>
@@ -15,10 +20,12 @@
     <form action="/post" method="post">
         <input type="text" name="title" placeholder="Title">
         <input type="text" name="subheading" placeholder="Sub Heading">
-        <input type="text" name="text" placeholder="Whathave you been up to?">
+        <input type="text" name="text" placeholder="What have you been up to?">
         <input type="submit">
     </form>
 
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="./libraries/materialize/js/materialize.min.js"></script>
 </body>
 
 </html>

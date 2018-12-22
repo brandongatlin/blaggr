@@ -1,11 +1,11 @@
-var express = require("express");
-var logger = require("morgan");
+const express = require("express");
+const logger = require("morgan");
 const path = require("path");
 const session = require('cookie-session');
 
 const bodyParser = require('body-parser');
-var mongoose = require("mongoose");
-var passport = require("passport");
+const mongoose = require("mongoose");
+const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(session({
-    keys: ['secretkey1', 'secretkey2', '...']
+    keys: ['hulkamanic']
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-var User = require("./models/userModel.js");
+const User = require("./models/userModel.js");
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
@@ -38,10 +38,8 @@ mongoose.connect("mongodb://localhost/blaggrDB", {
 
 require("./controller/routes")(app);
 
-var PORT = 3000;
+const PORT = 3000;
 
-
-// Parse request body as JSON
 app.use(express.urlencoded({
     extended: true
 }));
