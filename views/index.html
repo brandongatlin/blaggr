@@ -13,6 +13,13 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- testing-->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/styles.css" />
 
 
@@ -23,30 +30,81 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Logo</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li>
+                <div class="switch">
+                    <label>
+                        LogOut
+                        <input type="checkbox" id="login-switch">
+                        <span class="lever"></span>
+                        LogIn
+                    </label>
+                </div>
+
             </ul>
         </div>
     </nav>
-    <form action="/register" method="post">
-        <input type="text" name="firstName" placeholder="First Name">
-        <input type="text" name="lastName" placeholder="Last Name">
-        <input type="text" name="username" placeholder="eMail">
-        <input type="password" name="password" placeholder="password">
-        <input type="submit">
-    </form>
+
 
     <hr />
 
-    <form action="/login" method="post">
-        <input type="text" name="username" placeholder="eMail">
-        <input type="password" name="password" placeholder="password">
-        <input type="submit">
-    </form>
+    <div id="sign-up-modal" class="modal">
+        <div class="modal-content">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="active" href="#sign-up-tab">Sign Up</a></li>
+                    <li class="tab col s3"><a href="#log-in-tab">Log In</a></li>
+
+                </ul>
+            </div>
+
+            <div id="sign-up-tab" class="col s12">
+                <form action="/register" method="post">
+                    <div class="input-field col 6">
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name">
+                        <label for="firstName">First Name</label>
+                    </div>
+                    <div class="input-field col 6">
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+                        <label for="firstName">First Name</label>
+                    </div>
+                    <div class="input-field col 12">
+                        <input type="email" id="email" name="username" placeholder="eMail @ddress">
+                        <label for="email">eM@ail</label>
+                    </div>
+                    <div class="input-field col 12">
+                        <input type="password" id="password" name="password" placeholder="Password">
+                        <label for="password">Password</label>
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>
+            </div>
+
+            <div id="log-in-tab" class="col s12">
+                <div id="log-in-tab" class="col s12">
+                    <form action="/login" method="post">
+                        <input type="text" name="username" placeholder="eMail">
+                        <input type="password" name="password" placeholder="password">
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Dismiss</a>
+        </div>
+    </div>
+
+
+    </div>
+
+    </div>
 
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="./libraries/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="./assets/js/app.js"></script>
 </body>
 
 </html>

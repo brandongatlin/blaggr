@@ -11,13 +11,13 @@ const UserSchema = new Schema({
     firstName: {
         type: String,
         trim: true,
-        required: "First Name is Required"
+        required: [true, 'What\'s your first name?']
     },
 
     lastName: {
         type: String,
         trim: true,
-        required: "Last Name is Required"
+        required: [true, 'What\'s your last name?']
     },
 
     // You can read more about RegEx Patterns here https://www.regexbuddy.com/regex.html

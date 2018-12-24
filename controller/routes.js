@@ -7,6 +7,14 @@ const Comment = require("../models/commentModel.js");
 
 module.exports = function(app) {
 
+    function verifyAuth(req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.status(404); // constant defined elsewhere, accessible here
+            return res.end('Please Login'); // or a redirect in a traditional web app, 
+        } // as opposed to an SPA
+        next();
+    }
+
     app.get('/', function(req, res) {
         res.sendFile('/index.html', {
             root: 'views'
@@ -28,8 +36,10 @@ module.exports = function(app) {
 
             console.log('user registered!');
 
-            res.redirect('/dashboard');
-        });
+            res.redirect('/dashboard')
+
+        })
+
     });
 
     app.post('/login',
@@ -39,13 +49,25 @@ module.exports = function(app) {
         })
     );
 
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    })
+
     app.get('/dashboard', function(req, res) {
         console.log('auth ', req.isAuthenticated())
         console.log('user ', req.user)
 
-        res.sendFile('/dashboard.html', {
-            root: 'views'
-        });
+        if (req.isAuthenticated()) {
+            res.sendFile('/dashboard.html', {
+                root: 'views'
+            })
+        } else {
+            res.redirect('/')
+        }
+
+
+
     })
 
     app.post('/post', function(req, res) {

@@ -15,13 +15,19 @@ const ArticleSchema = new Schema({
         type: String,
         trim: true,
         required: "Subtitle is required",
-        maxlength: 150
+        mixlength: 150
     },
 
     body: {
         type: String,
         trim: true,
-        required: "Post text is required"
+        required: "Post text is required",
+        minlength: 200
+    },
+
+    visible: {
+        type: Boolean,
+        default: false
     },
 
     comments: {
