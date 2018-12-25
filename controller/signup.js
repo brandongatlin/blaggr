@@ -36,25 +36,6 @@ const parser = multer({
 
 module.exports = function(app) {
 
-    // function verifyAuth(req, res, next) {
-    //     if (!req.isAuthenticated()) {
-    //         res.status(404); // constant defined elsewhere, accessible here
-    //         return res.end('Please Login'); // or a redirect in a traditional web app, 
-    //     } // as opposed to an SPA
-    //     next();
-    // }
-
-    // custom middleware to protect dashboard to users not logged in
-    function isLoggedIn(req, res, next) {
-        if (req.isAuthenticated()) {
-            console.log('user isLoggedIn and Authenticated');
-            return next();
-        } else {
-            console.log('user is not isLoggedIn not Authenticated');
-            res.redirect('/login');
-        }
-    };
-
     app.post('/register', function(req, res, next) {
         console.log('registering user');
         console.log(req.body)
@@ -68,18 +49,10 @@ module.exports = function(app) {
                 return next(err);
             } else {
                 passport.authenticate('local')(req, res, function() {
-                    console.log("insdie the new auth fx req.user", req.user)
                     res.redirect('/dashboard');
                 })
             }
-
-            // console.log('user registered!');
-            // console.log(" inside register, before redirect, req.user is", req.user)
-
-            // res.redirect('/dashboard')
-
         })
-
     });
 
     app.post('/login',
@@ -93,7 +66,6 @@ module.exports = function(app) {
         req.logout();
         res.redirect('/');
     })
-
 
     app.post('/api/profilePic', parser.single("image"), (req, res) => {
         console.log("file", req.file) // to see what is returned to you

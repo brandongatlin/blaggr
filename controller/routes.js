@@ -37,7 +37,6 @@ module.exports = function(app) {
     })
 
     app.post('/post', function(req, res) {
-        console.log('post', req.body);
 
         Article.create({
             title: req.body.title,
