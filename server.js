@@ -13,8 +13,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 app.use(methodOverride('X-HTTP-Method-Override'))
 
-
-
 app.use(logger("dev"));
 
 app.engine('handlebars', exphbs({

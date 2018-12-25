@@ -15,6 +15,7 @@ module.exports = function(app) {
     })
 
     app.get('/dashboard', function(req, res) {
+
         console.log('auth ', req.isAuthenticated())
         console.log('user ', req.user)
 
@@ -33,8 +34,6 @@ module.exports = function(app) {
                 res.redirect('/')
             }
         })
-
-
     })
 
     app.post('/post', function(req, res) {

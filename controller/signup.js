@@ -44,6 +44,17 @@ module.exports = function(app) {
     //     next();
     // }
 
+    // custom middleware to protect dashboard to users not logged in
+    function isLoggedIn(req, res, next) {
+        if (req.isAuthenticated()) {
+            console.log('user isLoggedIn and Authenticated');
+            return next();
+        } else {
+            console.log('user is not isLoggedIn not Authenticated');
+            res.redirect('/login');
+        }
+    };
+
     app.post('/register', function(req, res, next) {
         console.log('registering user');
         console.log(req.body)
@@ -55,11 +66,17 @@ module.exports = function(app) {
             if (err) {
                 console.log('error while user register!', err);
                 return next(err);
+            } else {
+                passport.authenticate('local')(req, res, function() {
+                    console.log("insdie the new auth fx req.user", req.user)
+                    res.redirect('/dashboard');
+                })
             }
 
-            console.log('user registered!');
+            // console.log('user registered!');
+            // console.log(" inside register, before redirect, req.user is", req.user)
 
-            res.redirect('/dashboard')
+            // res.redirect('/dashboard')
 
         })
 
