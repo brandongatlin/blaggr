@@ -8,21 +8,21 @@ const ArticleSchema = new Schema({
         type: String,
         trim: true,
         required: "Title is required",
-        maxlength: 100
+        // maxlength: 100
     },
 
     subTitle: {
         type: String,
         trim: true,
         required: "Subtitle is required",
-        mixlength: 150
+        // maxlength: 150
     },
 
     body: {
         type: String,
         trim: true,
         required: "Post text is required",
-        minlength: 200
+        // minlength: 200
     },
 
     visible: {

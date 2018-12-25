@@ -3,6 +3,9 @@ const path = require('path')
 const User = require("../models/userModel.js");
 const Article = require("../models/articleModel.js");
 const Comment = require("../models/commentModel.js");
+const Image = require("../models/imageModel.js");
+
+var ObjectId = require('mongoose').Types.ObjectId;
 
 
 module.exports = function(app) {
@@ -16,9 +19,7 @@ module.exports = function(app) {
     }
 
     app.get('/', function(req, res) {
-        res.sendFile('/index.html', {
-            root: 'views'
-        });
+        res.render('home');
     })
 
     app.post('/register', function(req, res, next) {
@@ -58,15 +59,21 @@ module.exports = function(app) {
         console.log('auth ', req.isAuthenticated())
         console.log('user ', req.user)
 
-        if (req.isAuthenticated()) {
-            res.sendFile('/dashboard.html', {
-                root: 'views'
-            })
-        } else {
-            res.redirect('/')
-        }
+        Image.findOne({
+            userId: new ObjectId(req.user._id)
+        }, function(err, pic) {
+            console.log("pic", pic)
 
+            let hbsObj = {
+                pic: pic
+            }
 
+            if (req.isAuthenticated()) {
+                res.render('dashboard', hbsObj)
+            } else {
+                res.redirect('/')
+            }
+        })
 
     })
 

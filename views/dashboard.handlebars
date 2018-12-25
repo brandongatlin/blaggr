@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+
+</head>
+
+<body>
+
+    {{> nav}}
+
+    <h1>dashboard</h1>
+
+    <form action='/api/images' method="post" enctype="multipart/form-data">
+        <input type='file' name='image' />
+        <input type="submit">
+    </form>
+
+    <img src={{pic.url}} />
+
+    {{> blogEntry }}
+
+    <script src="./assets/js/dashboard.js"></script>
+</body>
+
+</html>

@@ -2,8 +2,8 @@
 //     var isChecked = document.getElementById('login-switch').checked;
 
 //     if (isChecked) {
-//         window.location.replace("/");
+//         alert('checked')
 //     } else {
-//         window.location.replace("/logout");
+//         alert('not checked!')
 //     }
 // });
