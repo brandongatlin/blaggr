@@ -36,13 +36,13 @@ const parser = multer({
 
 module.exports = function(app) {
 
-    function verifyAuth(req, res, next) {
-        if (!req.isAuthenticated()) {
-            res.status(404); // constant defined elsewhere, accessible here
-            return res.end('Please Login'); // or a redirect in a traditional web app, 
-        } // as opposed to an SPA
-        next();
-    }
+    // function verifyAuth(req, res, next) {
+    //     if (!req.isAuthenticated()) {
+    //         res.status(404); // constant defined elsewhere, accessible here
+    //         return res.end('Please Login'); // or a redirect in a traditional web app, 
+    //     } // as opposed to an SPA
+    //     next();
+    // }
 
     app.post('/register', function(req, res, next) {
         console.log('registering user');
@@ -78,16 +78,26 @@ module.exports = function(app) {
     })
 
 
-    app.post('/api/images', parser.single("image"), (req, res) => {
-        console.log(req.file) // to see what is returned to you
+    app.post('/api/profilePic', parser.single("image"), (req, res) => {
+        console.log("file", req.file) // to see what is returned to you
         const image = {};
         image.url = req.file.url;
         image.id = req.file.public_id;
         image.userId = req.user._id;
 
         Image.create(image) // save image information in database
-            .then(newImage => res.redirect('/dashboard'))
+            .then(newImage => console.log(newImage))
             .catch(err => console.log(err));
+
+        User.update({
+            _id: req.user._id
+        }, {
+            $set: {
+                profilePic: image.url
+            }
+        }).then(updatedProfile => {
+            res.redirect('/dashboard')
+        })
     });
 
 }

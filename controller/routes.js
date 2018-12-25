@@ -18,13 +18,13 @@ module.exports = function(app) {
         console.log('auth ', req.isAuthenticated())
         console.log('user ', req.user)
 
-        Image.findOne({
-            userId: new ObjectId(req.user._id)
-        }, function(err, pic) {
-            console.log("pic", pic)
+        User.findOne({
+            _id: new ObjectId(req.user._id)
+        }, function(err, profile) {
+            console.log("profile is ", profile)
 
             let hbsObj = {
-                pic: pic
+                profile: profile
             }
 
             if (req.isAuthenticated()) {

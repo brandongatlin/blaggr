@@ -1,4 +1,5 @@
 const express = require("express");
+const methodOverride = require('method-override')
 const exphbs = require('express-handlebars');
 const logger = require("morgan");
 const path = require("path");
@@ -10,6 +11,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
+app.use(methodOverride('X-HTTP-Method-Override'))
 
 
 
