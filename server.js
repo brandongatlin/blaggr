@@ -11,11 +11,7 @@ const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 
-const multer = require("multer");
-const cloudinary = require("cloudinary");
-const cloudinaryStorage = require("multer-storage-cloudinary");
 
-const Image = require('./models/imageModel');
 
 app.use(logger("dev"));
 
@@ -52,46 +48,13 @@ mongoose.connect("mongodb://localhost/blaggrDB", {
 });
 
 require("./controller/routes")(app);
+require("./controller/signup")(app);
 
 const PORT = 3000;
 
 app.use(express.urlencoded({
     extended: true
 }));
-
-//img upload section
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
-});
-
-const storage = cloudinaryStorage({
-    cloudinary: cloudinary,
-    folder: "test_pics",
-    allowedFormats: ["jpg", "png"],
-    transformation: [{
-        width: 500,
-        height: 500,
-        crop: "limit"
-    }]
-});
-
-const parser = multer({
-    storage: storage
-});
-
-app.post('/api/images', parser.single("image"), (req, res) => {
-    console.log(req.file) // to see what is returned to you
-    const image = {};
-    image.url = req.file.url;
-    image.id = req.file.public_id;
-    image.userId = req.user._id;
-
-    Image.create(image) // save image information in database
-        .then(newImage => res.render('dashboard'))
-        .catch(err => console.log(err));
-});
 
 // Start the server
 app.listen(PORT, function() {
