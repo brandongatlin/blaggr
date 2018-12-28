@@ -4,22 +4,122 @@
 <head>
     <title>Dashboard</title>
 
+
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/grid-dashboard.css" />
 </head>
 
 <body>
 
     {{> nav}}
 
-    <h1>dashboard</h1>
+    <div id="dash-grid">
 
-    <form action='/api/profilePic' method="post" enctype="multipart/form-data">
-        <input type='file' name='image' />
-        <input type="submit">
-    </form>
+        <div id="dash-main-section">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s6"><a class="active" href="#dash-tab-1">Tab 1</a></li>
+                    <li class="tab col s6"><a href="#dash-tab-2">Tab 2</a></li>
+                </ul>
+            </div>
 
-    <img src={{profile.profilePic}} />
+            <div id="dash-tab-1" class="col s12">Test 1
+                {{#each blogs}}
+                <h2>{{this.title}}</h2>
+                <h6>{{this.subTitle}}</h6>
+                <p>{{this.body}}</p>
 
-    {{> blogEntry }}
+                {{/each}}
+            </div>
+
+            <div id="dash-tab-2" class="col s12">New Entry
+                {{> blogEntry }}
+            </div>
+
+        </div>
+
+
+        <div id="profile-card">
+            <div class="card">
+                <div class="card-image">
+                    <img src={{profile.profilePic}}>
+                    <span class="card-title">{{profile.firstName}}</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#new-pic-modal"><i
+                            class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>Member Since: {{profile.userCreated}}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        {{!-- <div class="card" id="profile-card">
+            <div class="card-image" id="profile-img">
+                <img style="width: 100px;" src={{profile.profilePic}} />
+                <span class="card-title">{{profile.firstName}}</span>
+                <a class="waves-effect waves-light btn modal-trigger" style="width: 100px;" data-target="new-pic-modal"
+                    href="#new-pic-modal">
+            </div>
+            <div class="card-content">
+                <p>Member Since: {{profile.userCreated}}
+                </p>
+            </div>
+        </div> --}}
+
+        {{!-- <div id="profile-img-section">
+            <div>
+                <form action='/api/profilePic' method="post" enctype="multipart/form-data">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type='file' name='image' />
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div>
+                <img src={{profile.profilePic}} />
+            </div>
+        </div> --}}
+
+
+    </div>
+
+
+
+    <!-- Modal Structure -->
+    <div id="new-pic-modal" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <form action='/api/profilePic' method="post" enctype="multipart/form-data">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type='file' name='image' />
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right"></i>
+                </button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" type="submit" class="modal-close waves-effect waves-green btn-flat">Submit</a>
+        </div>
+    </div>
 
     <script src="./assets/js/dashboard.js"></script>
 </body>

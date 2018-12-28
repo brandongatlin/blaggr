@@ -19,20 +19,40 @@ module.exports = function(app) {
         console.log('auth ', req.isAuthenticated())
         console.log('user ', req.user)
 
+        let hbsObj = {
+            // profile: profile,
+            // blogs: blogs
+        }
+
         User.findOne({
             _id: new ObjectId(req.user._id)
         }, function(err, profile) {
-            console.log("profile is ", profile)
+            // console.log("profile is ", profile)
+            hbsObj.profile = profile;
 
-            let hbsObj = {
-                profile: profile
+            if (profile.following) {
+                console.log(profile.following);
+                profile.following.forEach(function(blogger) {
+                    console.log("blogger: " + blogger);
+                    Article.find({
+                        author: new ObjectId(blogger)
+                    }, function(err, blogs) {
+                        console.log("blogs in callback ", blogs)
+                        hbsObj.blogs = blogs;
+
+                        if (req.isAuthenticated()) {
+                            console.log("hbs object is: ", hbsObj)
+
+                            res.render('dashboard', hbsObj)
+                        } else {
+                            res.redirect('/')
+                        }
+                    })
+                })
             }
 
-            if (req.isAuthenticated()) {
-                res.render('dashboard', hbsObj)
-            } else {
-                res.redirect('/')
-            }
+
+
         })
     })
 

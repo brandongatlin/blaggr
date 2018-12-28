@@ -21,7 +21,7 @@ cloudinary.config({
 
 const storage = cloudinaryStorage({
     cloudinary: cloudinary,
-    folder: "test_pics",
+    folder: "user_profile_pics",
     allowedFormats: ["jpg", "png"],
     transformation: [{
         width: 500,

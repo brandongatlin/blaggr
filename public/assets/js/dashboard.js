@@ -1,9 +1,7 @@
-// document.querySelector('#login-switch').addEventListener('change', function() {
-//     var isChecked = document.getElementById('login-switch').checked;
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('#new-pic-modal');
+    var instances = M.Modal.init(elems);
+});
 
-//     if (isChecked) {
-//         alert('checked')
-//     } else {
-//         alert('not checked!')
-//     }
-// });
+// var instance = M.Tabs.init(el);
+M.AutoInit();

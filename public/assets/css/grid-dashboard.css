@@ -1,0 +1,15 @@
+#dash-grid {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: "dashTabs dashTabs dashTabs profile";
+}
+
+#dash-main-section {
+    grid-area: dashTabs;
+    padding: 20px;
+}
+
+#profile-card {
+    grid-area: profile;
+}
