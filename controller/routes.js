@@ -24,23 +24,22 @@ module.exports = function(app) {
         User.findOne({
             _id: new ObjectId(req.user._id)
         }, function(err, profile) {
-            // console.log("profile is ", profile)
             hbsObj.profile = profile;
 
-            if (profile.following) {
+            if (profile.following.length > 0) {
                 profile.following.forEach(function(blogger) {
                     Article.find({
                         author: new ObjectId(blogger)
                     }, function(err, blogs) {
                         hbsObj.blogs = blogs;
-
-                        if (req.isAuthenticated()) {
-                            res.render('dashboard', hbsObj)
-                        } else {
-                            res.redirect('/')
-                        }
                     })
                 })
+            }
+
+            if (req.isAuthenticated()) {
+                res.render('dashboard', hbsObj)
+            } else {
+                res.redirect('/')
             }
         })
     })
