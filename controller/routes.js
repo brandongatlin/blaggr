@@ -27,22 +27,18 @@ module.exports = function(app) {
 
     app.get('/dashboard', function(req, res) {
 
-        console.log('auth ', req.isAuthenticated())
-
         let hbsObj = {}
 
         User.findOne({
             _id: new ObjectId(req.user._id)
         }, function(err, profile) {
             hbsObj.profile = profile;
-            console.log("length", profile.following.length)
             if (profile.following.length > 0) {
-                console.log("if")
-
                 profile.following.forEach(function(blogger) {
                     Article.find({
                         author: new ObjectId(blogger)
                     }, function(err, blogs) {
+                        console.log("each blog", blogs)
                         hbsObj.blogs = blogs;
                         if (req.isAuthenticated()) {
                             res.render('dashboard', hbsObj)
@@ -52,7 +48,6 @@ module.exports = function(app) {
                     })
                 })
             } else {
-                console.log("else")
                 if (req.isAuthenticated()) {
                     res.render('dashboard', hbsObj)
                 } else {
@@ -64,10 +59,13 @@ module.exports = function(app) {
 
     app.post('/post', function(req, res) {
 
+        let tags = req.body.tags.split(" ");
+
         Article.create({
             title: req.body.title,
             subTitle: req.body.subheading,
             body: req.body.text,
+            tags: tags,
             author: req.user._id
         }).then(function(newPost) {
             console.log(newPost);

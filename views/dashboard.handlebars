@@ -26,7 +26,17 @@
                 <h2>{{this.title}}</h2>
                 <h6>{{this.subTitle}}</h6>
                 <p>{{this.body}}</p>
+                {{#if tags}}
+                {{#each tags}}
+                <div class="chip">
+                    {{this}}
+                </div>
                 {{/each}}
+                {{/if}}
+                {{/each}}
+
+
+
             </div>
 
             <div id="dash-tab-2" class="col s12">

@@ -27,6 +27,11 @@ const UserSchema = new Schema({
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
     },
 
+    tags: {
+        type: String,
+        minlength: 3
+    },
+
     following: {
         type: [Schema.Types.ObjectId]
     },
