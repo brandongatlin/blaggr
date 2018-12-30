@@ -14,10 +14,20 @@ module.exports = function(app) {
         res.render('home');
     })
 
+    // app.get('/dashboard', (req, res) => {
+    //     let hbsObj = {}
+
+    //     User.findOne({
+    //         _id: new ObjectId(req.user._id)
+    //     }).populate('article').exec(function(err, blogger) {
+    //         if (err) return err;
+    //         console.log("blogger is: " + blogger)
+    //     })
+    // })
+
     app.get('/dashboard', function(req, res) {
 
         console.log('auth ', req.isAuthenticated())
-        console.log('user ', req.user)
 
         let hbsObj = {}
 
@@ -25,21 +35,29 @@ module.exports = function(app) {
             _id: new ObjectId(req.user._id)
         }, function(err, profile) {
             hbsObj.profile = profile;
-
+            console.log("length", profile.following.length)
             if (profile.following.length > 0) {
+                console.log("if")
+
                 profile.following.forEach(function(blogger) {
                     Article.find({
                         author: new ObjectId(blogger)
                     }, function(err, blogs) {
                         hbsObj.blogs = blogs;
+                        if (req.isAuthenticated()) {
+                            res.render('dashboard', hbsObj)
+                        } else {
+                            res.redirect('/')
+                        }
                     })
                 })
-            }
-
-            if (req.isAuthenticated()) {
-                res.render('dashboard', hbsObj)
             } else {
-                res.redirect('/')
+                console.log("else")
+                if (req.isAuthenticated()) {
+                    res.render('dashboard', hbsObj)
+                } else {
+                    res.redirect('/')
+                }
             }
         })
     })

@@ -40,6 +40,10 @@ const ArticleSchema = new Schema({
         ref: "User"
     },
 
+    tags: {
+        type: ["STRING"]
+    },
+
     articleCreated: {
         type: Date,
         default: Date.now
