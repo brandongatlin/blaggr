@@ -54,6 +54,8 @@ const ArticleSchema = new Schema({
         default: Date.now
     }
 
+}, {
+    multi: true
 })
 
 const Article = mongoose.model("Article", ArticleSchema);

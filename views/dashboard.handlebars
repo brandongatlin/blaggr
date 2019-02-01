@@ -22,7 +22,7 @@
             </div>
 
             <div id="dash-tab-1" class="col s12">
-                {{#each blogs}}
+                {{#each articles}}
                 <h2>{{this.title}}</h2>
                 <h6>{{this.subTitle}}</h6>
                 <p>{{this.body}}</p>
@@ -49,13 +49,13 @@
         <div id="profile-card">
             <div class="card">
                 <div class="card-image">
-                    <img src={{profile.profilePic}}>
-                    <span class="card-title">{{profile.firstName}}</span>
+                    <img src={{user.profilePic}}>
+                    <span class="card-title">{{user.firstName}}</span>
                     <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#new-pic-modal"><i
                             class="material-icons">add</i></a>
                 </div>
                 <div class="card-content">
-                    <p>Member Since: {{profile.userCreated}}</p>
+                    <p>Member Since: {{user.userCreated}}</p>
                 </div>
             </div>
         </div>

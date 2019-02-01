@@ -42,7 +42,8 @@ module.exports = function(app) {
         User.register(new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            username: req.body.username
+            username: req.body.username,
+            following: new ObjectId("5c296c8c2b5d5411e4132f3a")
         }), req.body.password, function(err) {
             if (err) {
                 console.log('error while user register!', err);

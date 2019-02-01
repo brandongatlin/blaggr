@@ -33,7 +33,13 @@ const UserSchema = new Schema({
     },
 
     following: {
-        type: [Schema.Types.ObjectId]
+        type: [Schema.Types.ObjectId],
+        ref: "User"
+    },
+
+    written: {
+        type: [Schema.Types.ObjectId],
+        ref: "Article"
     },
 
     userCreated: {
@@ -47,6 +53,8 @@ const UserSchema = new Schema({
         default: "http://cdn.akamai.steamstatic.com/steamcommunity/public/images/avatars/4a/4a3515fc3b35e84999865a8015e5480e1b864cfa_full.jpg"
     }
 
+}, {
+    multi: true
 });
 
 UserSchema.plugin(passportLocalMongoose);
